@@ -1,0 +1,11 @@
+POST http://localhost:3000/ HTTP/1.1
+content-type: application/json
+
+{
+    "from": "bc1qqaqcn2zlkvwr0fyllvk3erf3475qpaz008x6ha",
+    "to": "bc1q4uts48ttqfx6thh2zwxeqg3q45lnhxpzuewvys",
+    "amount": 37,
+    "priv": "L5hKCeP5aDiqWMy99BFxB4EUD84B8uaBAQCkECQR6wL3M6HUg5Wq",
+    "coin": "btc",
+    "net": "main"
+}

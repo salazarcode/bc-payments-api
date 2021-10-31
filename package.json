@@ -1,0 +1,19 @@
+{
+  "name": "SignerNode",
+  "version": "1.0.0",
+  "description": "Application to sign transactions destined to be sent to different blockchain",
+  "main": "index.js",
+  "author": "Andrés Salazar salazarcode@gmail.com",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "bip32": "^2.0.6",
+    "bitcoinjs-lib": "^5.2.0",
+    "cors": "^2.8.5",
+    "ecpair": "^1.0.1",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
+    "node-fetch": "^3.0.0"
+  },
+  "type": "module"
+}
