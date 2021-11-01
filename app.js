@@ -24,14 +24,16 @@ app.post('/', async (req, res) => {
 	let tmptx = await getBlockCypherSkeleton(coin, net, from, to, amount);
 
 	tmptx.pubkeys = [];
-	tmptx.signatures = tmptx.tosign.map(function (tosign, n) {
+	tmptx.signatures = tmptx.tosign.map((tosign, n) => {
 		tmptx.pubkeys.push(keys.publicKey.toString('hex'));
-		return bitcoin.script.signature.encode(
+		let encodedSignature = bitcoin.script.signature.encode(
 			keys.sign(Buffer.from(tosign, "hex")),
 			0x01,
 		)
 		.toString("hex")
 		.slice(0, -2);
+		
+		return encodedSignature;
 	});
 
 	let finaltx = await sendSignedTransaction(coin, net, tmptx);
