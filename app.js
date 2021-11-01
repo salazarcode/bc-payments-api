@@ -2,7 +2,7 @@ import cors from 'cors';
 import express from 'express';
 import bitcoin from "bitcoinjs-lib";
 import dotenv from 'dotenv';
-import calls from './bc-calls.js';
+import calls from './bc-utils.js';
 
 dotenv.config();
 
@@ -24,21 +24,9 @@ app.post('/', async (req, res) => {
 	let net = req.body.net;
 	var keys = bitcoin.ECPair.fromWIF(priv, bitcoin.networks.bitcoin);
 
-	let tmptx = await calls.newSkeleton(coin, net, from, to, amount);
-
-	tmptx.pubkeys = [];
-	tmptx.signatures = [];
-
-	tmptx.signatures = tmptx.tosign.map(function (tosign, n) {
-		tmptx.pubkeys.push(keys.publicKey.toString('hex'));
-		return bitcoin.script.signature.encode(
-			keys.sign(Buffer.from(tosign, "hex")),
-			0x01,
-		).toString("hex").slice(0, -2) + "01";
-	});
-	//res.send(tmptx);
-
-	let finaltx = await calls.send(coin, net, tmptx);
+	let newTx = await calls.newSkeleton(coin, net, from, to, amount);
+	let txSigned = calls.sign(newTx);
+	let finaltx = await calls.send(coin, net, txSigned);
 
 	res.send(finaltx);
 });
