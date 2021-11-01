@@ -1,5 +1,5 @@
 {
-  "name": "SignerNode",
+  "name": "signer-node",
   "version": "1.0.0",
   "description": "Application to sign transactions destined to be sent to different blockchain",
   "main": "index.js",

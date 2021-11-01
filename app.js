@@ -25,14 +25,16 @@ app.post('/', async (req, res) => {
 
 	tmptx.pubkeys = [];
 	tmptx.signatures = tmptx.tosign.map((tosign, n) => {
+		
 		tmptx.pubkeys.push(keys.publicKey.toString('hex'));
+
 		let encodedSignature = bitcoin.script.signature.encode(
 			keys.sign(Buffer.from(tosign, "hex")),
 			0x01,
 		)
 		.toString("hex")
 		.slice(0, -2);
-		
+
 		return encodedSignature;
 	});
 
