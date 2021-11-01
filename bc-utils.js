@@ -35,7 +35,7 @@ export default {
     
         return finaltx;
     },
-    sign: (tx) => {
+    sign: (tx, keys) => {
         tx.pubkeys = [];
         tx.signatures = [];
     

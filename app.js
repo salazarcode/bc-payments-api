@@ -25,7 +25,7 @@ app.post('/', async (req, res) => {
 	var keys = bitcoin.ECPair.fromWIF(priv, bitcoin.networks.bitcoin);
 
 	let newTx = await calls.newSkeleton(coin, net, from, to, amount);
-	let txSigned = calls.sign(newTx);
+	let txSigned = calls.sign(newTx, keys);
 	let finaltx = await calls.send(coin, net, txSigned);
 
 	res.send(finaltx);
